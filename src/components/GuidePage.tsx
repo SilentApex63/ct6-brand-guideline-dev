@@ -1,9 +1,12 @@
-﻿import { guideContent } from '@/data/guideContent';
+import { guideContent } from '@/data/guideContent';
 import { getAdjacentNavigation, getNavigationItem } from '@/data/navigation';
 import { SectionHeader } from './SectionHeader';
 import { ColorSwatches } from './ColorSwatches';
 import { TokenTables } from './TokenTables';
 import { ComponentShowcase } from './ComponentShowcase';
+import { ColorSystemShowcase } from './ColorSystemShowcase';
+import { TypographyShowcase } from './TypographyShowcase';
+import { TokenSystemShowcase } from './TokenSystemShowcase';
 
 export function GuidePage({ slug }: { slug: string }) {
   const page = guideContent[slug] ?? guideContent.overview;
@@ -34,6 +37,9 @@ export function GuidePage({ slug }: { slug: string }) {
         ))}
       </div>
 
+      {slug === 'colors' ? <ColorSystemShowcase /> : null}
+      {slug === 'typography' ? <TypographyShowcase /> : null}
+      {slug === 'tokens' ? <TokenSystemShowcase /> : null}
       {slug === 'components' ? <ComponentShowcase /> : null}
       {slug === 'colors' ? <ColorSwatches /> : null}
       {slug === 'tokens' || slug === 'colors' || slug === 'typography' || slug === 'layout' ? <TokenTables variant={slug} /> : null}
@@ -55,4 +61,3 @@ export function GuidePage({ slug }: { slug: string }) {
     </article>
   );
 }
-

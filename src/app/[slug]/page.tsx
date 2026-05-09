@@ -1,4 +1,4 @@
-﻿import { notFound } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { BrandShell } from '@/components/BrandShell';
 import { GuidePage } from '@/components/GuidePage';
 import { guideContent } from '@/data/guideContent';
@@ -31,4 +31,3 @@ export default async function StaticGuidePage({ params }: StaticGuidePageProps) 
     </BrandShell>
   );
 }
-
