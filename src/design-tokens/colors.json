@@ -1,0 +1,202 @@
+{
+  "color": {
+    "primary": {
+      "950": {
+        "value": "#050607",
+        "name": "Void Black",
+        "usage": "Primary dark app background"
+      },
+      "500": {
+        "value": "#35E184",
+        "name": "Command Green",
+        "usage": "Primary action, active, success and ready states"
+      }
+    },
+    "accent": {
+      "gold": {
+        "500": {
+          "value": "#C7A44A",
+          "name": "Premium Gold",
+          "usage": "Premium, rank, leadership, featured highlights"
+        }
+      },
+      "red": {
+        "500": {
+          "value": "#FF4D4D",
+          "name": "Alert Red",
+          "usage": "Danger, errors, destructive actions"
+        }
+      },
+      "cyan": {
+        "500": {
+          "value": "#58C7FF",
+          "name": "Signal Cyan",
+          "usage": "Info states, telemetry, links"
+        }
+      }
+    },
+    "neutral": {
+      "1000": {
+        "value": "#000000",
+        "name": "Black Core"
+      },
+      "950": {
+        "value": "#0B0E11",
+        "name": "Carbon"
+      },
+      "900": {
+        "value": "#11161C",
+        "name": "Obsidian"
+      },
+      "800": {
+        "value": "#18212B",
+        "name": "Graphite Blue"
+      },
+      "700": {
+        "value": "#2B323A",
+        "name": "Gunsteel"
+      },
+      "600": {
+        "value": "#3D4652",
+        "name": "Steel"
+      },
+      "500": {
+        "value": "#545E6A",
+        "name": "Disabled Steel"
+      },
+      "400": {
+        "value": "#737D8A",
+        "name": "Muted Grey"
+      },
+      "300": {
+        "value": "#AAB3BE",
+        "name": "Silver Grey"
+      },
+      "100": {
+        "value": "#E7ECF2",
+        "name": "Platinum"
+      }
+    },
+    "background": {
+      "default": {
+        "value": "#050607",
+        "name": "App Background Dark"
+      },
+      "surface": {
+        "value": "#0B0E11",
+        "name": "Surface Dark"
+      },
+      "elevated": {
+        "value": "#11161C",
+        "name": "Elevated Surface"
+      },
+      "glass": {
+        "value": "rgba(17, 22, 28, 0.72)",
+        "name": "Glass Surface"
+      },
+      "scrim": {
+        "value": "rgba(0, 0, 0, 0.68)",
+        "name": "Scrim"
+      }
+    },
+    "text": {
+      "primary": {
+        "value": "#F5F7FA",
+        "name": "Tactical White"
+      },
+      "secondary": {
+        "value": "#AAB3BE",
+        "name": "Silver Grey"
+      },
+      "muted": {
+        "value": "#737D8A",
+        "name": "Muted Grey"
+      },
+      "disabled": {
+        "value": "#545E6A",
+        "name": "Disabled Steel"
+      },
+      "inverse": {
+        "value": "#050607",
+        "name": "Inverse Text"
+      }
+    },
+    "border": {
+      "subtle": {
+        "value": "#202832",
+        "name": "Subtle Border"
+      },
+      "strong": {
+        "value": "#3D4652",
+        "name": "Strong Border"
+      },
+      "active": {
+        "value": "#35E184",
+        "name": "Active Border"
+      },
+      "premium": {
+        "value": "#C7A44A",
+        "name": "Premium Border"
+      },
+      "danger": {
+        "value": "#FF4D4D",
+        "name": "Danger Border"
+      }
+    },
+    "semantic": {
+      "success": {
+        "500": {
+          "value": "#35E184",
+          "name": "Success"
+        }
+      },
+      "warning": {
+        "500": {
+          "value": "#F4B860",
+          "name": "Warning"
+        }
+      },
+      "error": {
+        "500": {
+          "value": "#FF4D4D",
+          "name": "Error"
+        }
+      },
+      "info": {
+        "500": {
+          "value": "#58C7FF",
+          "name": "Info"
+        }
+      }
+    },
+    "light": {
+      "background": {
+        "value": "#F3F5F7"
+      },
+      "surface": {
+        "value": "#FFFFFF"
+      },
+      "surfaceAlt": {
+        "value": "#E8EDF2"
+      },
+      "textPrimary": {
+        "value": "#11161C"
+      },
+      "textSecondary": {
+        "value": "#4D5967"
+      },
+      "border": {
+        "value": "#CCD5DE"
+      },
+      "primaryAction": {
+        "value": "#0A7A45"
+      },
+      "premiumGold": {
+        "value": "#8A6A1F"
+      },
+      "error": {
+        "value": "#C62828"
+      }
+    }
+  }
+}

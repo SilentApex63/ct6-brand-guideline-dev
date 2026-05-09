@@ -1,0 +1,32 @@
+{
+  "motion": {
+    "duration": {
+      "instant": {
+        "value": "80ms"
+      },
+      "fast": {
+        "value": "150ms"
+      },
+      "medium": {
+        "value": "250ms"
+      },
+      "slow": {
+        "value": "400ms"
+      }
+    },
+    "easing": {
+      "standard": {
+        "value": "cubic-bezier(0.2, 0, 0, 1)"
+      },
+      "enter": {
+        "value": "cubic-bezier(0, 0, 0.2, 1)"
+      },
+      "exit": {
+        "value": "cubic-bezier(0.4, 0, 1, 1)"
+      },
+      "command": {
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)"
+      }
+    }
+  }
+}

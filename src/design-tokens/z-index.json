@@ -1,0 +1,28 @@
+{
+  "z": {
+    "base": {
+      "value": 0
+    },
+    "card": {
+      "value": 10
+    },
+    "nav": {
+      "value": 100
+    },
+    "sticky": {
+      "value": 200
+    },
+    "dropdown": {
+      "value": 400
+    },
+    "modal": {
+      "value": 700
+    },
+    "toast": {
+      "value": 900
+    },
+    "system": {
+      "value": 1000
+    }
+  }
+}

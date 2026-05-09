@@ -1,0 +1,157 @@
+{
+  "font": {
+    "family": {
+      "body": {
+        "value": "Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+      },
+      "heading": {
+        "value": "Space Grotesk, Inter, system-ui, sans-serif"
+      },
+      "mono": {
+        "value": "JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+      }
+    },
+    "weight": {
+      "regular": {
+        "value": 400
+      },
+      "medium": {
+        "value": 500
+      },
+      "semibold": {
+        "value": 600
+      },
+      "bold": {
+        "value": 700
+      }
+    },
+    "display": {
+      "size": {
+        "value": "48px"
+      },
+      "lineHeight": {
+        "value": "56px"
+      },
+      "weight": {
+        "value": 700
+      }
+    },
+    "heading": {
+      "h1": {
+        "size": {
+          "value": "36px"
+        },
+        "lineHeight": {
+          "value": "44px"
+        },
+        "weight": {
+          "value": 700
+        }
+      },
+      "h2": {
+        "size": {
+          "value": "30px"
+        },
+        "lineHeight": {
+          "value": "38px"
+        },
+        "weight": {
+          "value": 700
+        }
+      },
+      "h3": {
+        "size": {
+          "value": "24px"
+        },
+        "lineHeight": {
+          "value": "32px"
+        },
+        "weight": {
+          "value": 600
+        }
+      },
+      "h4": {
+        "size": {
+          "value": "20px"
+        },
+        "lineHeight": {
+          "value": "28px"
+        },
+        "weight": {
+          "value": 600
+        }
+      }
+    },
+    "body": {
+      "large": {
+        "size": {
+          "value": "18px"
+        },
+        "lineHeight": {
+          "value": "28px"
+        },
+        "weight": {
+          "value": 400
+        }
+      },
+      "default": {
+        "size": {
+          "value": "16px"
+        },
+        "lineHeight": {
+          "value": "24px"
+        },
+        "weight": {
+          "value": 400
+        }
+      },
+      "compact": {
+        "size": {
+          "value": "14px"
+        },
+        "lineHeight": {
+          "value": "20px"
+        },
+        "weight": {
+          "value": 400
+        }
+      }
+    },
+    "label": {
+      "size": {
+        "value": "13px"
+      },
+      "lineHeight": {
+        "value": "18px"
+      },
+      "weight": {
+        "value": 600
+      },
+      "letterSpacing": {
+        "value": "0.06em"
+      }
+    },
+    "caption": {
+      "size": {
+        "value": "12px"
+      },
+      "lineHeight": {
+        "value": "16px"
+      },
+      "weight": {
+        "value": 500
+      }
+    },
+    "button": {
+      "size": {
+        "value": "14px"
+      },
+      "lineHeight": {
+        "value": "20px"
+      },
+      "weight": {
+        "value": 600
+      }
+    }
+  }
+}
