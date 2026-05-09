@@ -1,17 +1,27 @@
 import { guideContent } from '@/data/guideContent';
+import { getAdjacentNavigation, getNavigationItem } from '@/data/navigation';
 import { SectionHeader } from './SectionHeader';
 import { ColorSwatches } from './ColorSwatches';
 import { TokenTables } from './TokenTables';
 
 export function GuidePage({ slug }: { slug: string }) {
   const page = guideContent[slug] ?? guideContent.overview;
+  const current = getNavigationItem(slug);
+  const { previous, next } = getAdjacentNavigation(slug);
 
   return (
     <article className="guidePage">
-      <SectionHeader eyebrow={page.eyebrow} title={page.title} summary={page.summary} />
+      <SectionHeader
+        eyebrow={page.eyebrow}
+        title={page.title}
+        summary={page.summary}
+        meta={[current?.index ? `Section ${current.index}` : 'Guideline', current?.group ?? 'Brand System', 'Static reference']}
+      />
+
       <div className="sectionGrid">
-        {page.sections.map((section) => (
-          <section className="panel" key={section.heading}>
+        {page.sections.map((section, index) => (
+          <section className="panel guidePanel" key={section.heading}>
+            <span className="panelIndex">{String(index + 1).padStart(2, '0')}</span>
             <h2>{section.heading}</h2>
             {section.body ? <p>{section.body}</p> : null}
             {section.bullets ? (
@@ -22,8 +32,24 @@ export function GuidePage({ slug }: { slug: string }) {
           </section>
         ))}
       </div>
+
       {slug === 'colors' ? <ColorSwatches /> : null}
       {slug === 'tokens' || slug === 'colors' || slug === 'typography' || slug === 'layout' ? <TokenTables variant={slug} /> : null}
+
+      <footer className="pageNav" aria-label="Section navigation">
+        {previous ? (
+          <a href={previous.href}>
+            <span>Previous</span>
+            <strong>{previous.label}</strong>
+          </a>
+        ) : <span />}
+        {next ? (
+          <a href={next.href} className="pageNavNext">
+            <span>Next</span>
+            <strong>{next.label}</strong>
+          </a>
+        ) : <span />}
+      </footer>
     </article>
   );
 }

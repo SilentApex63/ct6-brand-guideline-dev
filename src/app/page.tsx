@@ -1,10 +1,10 @@
 import { BrandShell } from '@/components/BrandShell';
-import { GuidePage } from '@/components/GuidePage';
+import { LandingPage } from '@/components/LandingPage';
 
 export default function HomePage() {
   return (
-    <BrandShell>
-      <GuidePage slug="overview" />
+    <BrandShell activeSlug="overview">
+      <LandingPage />
     </BrandShell>
   );
 }

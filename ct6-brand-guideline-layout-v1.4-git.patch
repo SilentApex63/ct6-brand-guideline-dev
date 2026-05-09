@@ -1,0 +1,1315 @@
+diff --git a/src/app/[slug]/page.tsx b/src/app/[slug]/page.tsx
+index 10acb93..38a3d0f 100644
+--- a/src/app/[slug]/page.tsx
++++ b/src/app/[slug]/page.tsx
+@@ -14,7 +14,7 @@ export default function StaticGuidePage({ params }: { params: { slug: string } }
+   }
+ 
+   return (
+-    <BrandShell>
++    <BrandShell activeSlug={params.slug}>
+       <GuidePage slug={params.slug} />
+     </BrandShell>
+   );
+diff --git a/src/app/globals.css b/src/app/globals.css
+index a997285..fa225b0 100644
+--- a/src/app/globals.css
++++ b/src/app/globals.css
+@@ -5,14 +5,19 @@
+ }
+ 
+ html {
++  min-height: 100%;
+   background: var(--ct6-color-bg-default);
++  scroll-behavior: smooth;
+ }
+ 
+ body {
++  min-height: 100%;
+   margin: 0;
+   background:
+-    radial-gradient(circle at top right, rgba(53, 225, 132, 0.12), transparent 32rem),
+-    radial-gradient(circle at 20% 0%, rgba(88, 199, 255, 0.08), transparent 28rem),
++    linear-gradient(180deg, rgba(5, 6, 7, 0.18), rgba(5, 6, 7, 0.82)),
++    radial-gradient(circle at 84% 4%, rgba(53, 225, 132, 0.13), transparent 30rem),
++    radial-gradient(circle at 18% 0%, rgba(88, 199, 255, 0.08), transparent 28rem),
++    radial-gradient(circle at 78% 70%, rgba(199, 164, 74, 0.08), transparent 32rem),
+     var(--ct6-color-bg-default);
+   color: var(--ct6-color-text-primary);
+   font-family: var(--ct6-font-family-body);
+@@ -20,11 +25,31 @@ body {
+   line-height: var(--ct6-font-body-line-height);
+ }
+ 
++body::before {
++  position: fixed;
++  inset: 0;
++  z-index: -1;
++  pointer-events: none;
++  content: '';
++  background-image:
++    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
++    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
++  background-size: 48px 48px;
++  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 82%);
++}
++
+ a {
+   color: inherit;
+   text-decoration: none;
+ }
+ 
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
+ :focus-visible {
+   outline: none;
+   box-shadow: var(--ct6-shadow-focus);
+@@ -33,96 +58,271 @@ a {
+ .brandShell {
+   display: grid;
+   min-height: 100vh;
+-  grid-template-columns: 300px minmax(0, 1fr);
++  grid-template-columns: 316px minmax(0, 1fr);
+ }
+ 
+ .sidebar {
+   position: sticky;
+   top: 0;
++  z-index: var(--ct6-z-nav);
+   height: 100vh;
+   overflow: auto;
+-  border-right: 1px solid var(--ct6-color-border-subtle);
+-  background: rgba(5, 6, 7, 0.86);
++  border-right: 1px solid rgba(61, 70, 82, 0.58);
++  background:
++    linear-gradient(180deg, rgba(5, 6, 7, 0.96), rgba(11, 14, 17, 0.9)),
++    rgba(5, 6, 7, 0.88);
+   backdrop-filter: blur(18px);
+-  padding: var(--ct6-space-6);
+-  z-index: var(--ct6-z-nav);
++  padding: var(--ct6-space-5);
+ }
+ 
+ .brandLockup {
+   display: grid;
+-  grid-template-columns: 48px 1fr;
++  grid-template-columns: 52px 1fr;
+   gap: var(--ct6-space-3);
+   align-items: center;
+-  padding-bottom: var(--ct6-space-6);
++  padding: var(--ct6-space-2) 0 var(--ct6-space-5);
+   border-bottom: 1px solid var(--ct6-color-border-subtle);
+ }
+ 
+ .brandMark {
+   display: inline-grid;
+   place-items: center;
+-  width: 48px;
+-  height: 48px;
+-  border: 1px solid var(--ct6-color-border-active);
++  width: 52px;
++  height: 52px;
++  border: 1px solid rgba(53, 225, 132, 0.82);
+   border-radius: var(--ct6-radius-md);
+-  background: linear-gradient(145deg, rgba(53, 225, 132, 0.18), rgba(199, 164, 74, 0.08));
++  background:
++    linear-gradient(145deg, rgba(53, 225, 132, 0.18), rgba(199, 164, 74, 0.08)),
++    rgba(17, 22, 28, 0.88);
+   color: var(--ct6-color-primary-500);
+   font-family: var(--ct6-font-family-heading);
+   font-weight: var(--ct6-font-weight-bold);
++  letter-spacing: -0.04em;
+   box-shadow: var(--ct6-shadow-glow-green);
+ }
+ 
+-.brandLockup strong {
++.brandLockupText strong {
+   display: block;
+   font-family: var(--ct6-font-family-heading);
+   font-size: 16px;
++  letter-spacing: -0.01em;
+ }
+ 
+-.brandLockup small {
++.brandLockupText small {
+   display: block;
++  margin-top: 2px;
+   color: var(--ct6-color-text-muted);
+   font-size: var(--ct6-font-caption-size);
+ }
+ 
++.sidebarStatus {
++  display: inline-flex;
++  gap: var(--ct6-space-2);
++  align-items: center;
++  margin: var(--ct6-space-5) 0 var(--ct6-space-2);
++  border: 1px solid rgba(53, 225, 132, 0.22);
++  border-radius: var(--ct6-radius-badge);
++  background: rgba(53, 225, 132, 0.06);
++  color: var(--ct6-color-text-secondary);
++  font-size: var(--ct6-font-caption-size);
++  line-height: var(--ct6-font-caption-line-height);
++  padding: 6px 10px;
++}
++
++.statusDot {
++  display: inline-block;
++  width: 8px;
++  height: 8px;
++  flex: 0 0 auto;
++  border-radius: 999px;
++  background: var(--ct6-color-primary-500);
++  box-shadow: 0 0 14px rgba(53, 225, 132, 0.72);
++}
++
+ .navList {
+   display: grid;
+-  gap: var(--ct6-space-1);
+-  margin-top: var(--ct6-space-6);
++  gap: var(--ct6-space-5);
++  margin-top: var(--ct6-space-5);
++}
++
++.navGroup h2 {
++  margin: 0 0 var(--ct6-space-2);
++  color: var(--ct6-color-text-muted);
++  font-family: var(--ct6-font-family-body);
++  font-size: 11px;
++  font-weight: var(--ct6-font-weight-semibold);
++  letter-spacing: 0.12em;
++  line-height: 1.2;
++  text-transform: uppercase;
+ }
+ 
+-.navList a {
++.navGroupLinks {
++  display: grid;
++  gap: 2px;
++}
++
++.navGroupLinks a {
++  display: grid;
++  grid-template-columns: 34px 1fr;
++  gap: var(--ct6-space-2);
++  align-items: center;
++  min-height: 36px;
++  border: 1px solid transparent;
+   border-radius: var(--ct6-radius-sm);
+   color: var(--ct6-color-text-secondary);
+   font-size: var(--ct6-font-body-compact-size);
+-  padding: var(--ct6-space-2) var(--ct6-space-3);
+-  transition: color var(--ct6-motion-fast) var(--ct6-ease-standard), background var(--ct6-motion-fast) var(--ct6-ease-standard);
++  padding: 7px var(--ct6-space-3);
++  transition:
++    color var(--ct6-motion-fast) var(--ct6-ease-standard),
++    background var(--ct6-motion-fast) var(--ct6-ease-standard),
++    border-color var(--ct6-motion-fast) var(--ct6-ease-standard),
++    transform var(--ct6-motion-fast) var(--ct6-ease-standard);
+ }
+ 
+-.navList a:hover {
+-  background: rgba(53, 225, 132, 0.08);
++.navGroupLinks a:hover {
++  border-color: rgba(53, 225, 132, 0.18);
++  background: rgba(53, 225, 132, 0.07);
+   color: var(--ct6-color-text-primary);
+ }
+ 
++.navGroupLinks a.isActive,
++.navGroupLinks a[aria-current='page'] {
++  border-color: rgba(53, 225, 132, 0.36);
++  background:
++    linear-gradient(90deg, rgba(53, 225, 132, 0.14), rgba(53, 225, 132, 0.04)),
++    rgba(17, 22, 28, 0.78);
++  color: var(--ct6-color-text-primary);
++}
++
++.navIndex {
++  color: var(--ct6-color-text-muted);
++  font-family: var(--ct6-font-family-mono);
++  font-size: 11px;
++}
++
++.mainShell {
++  min-width: 0;
++}
++
++.commandBar {
++  position: sticky;
++  top: 0;
++  z-index: var(--ct6-z-sticky);
++  display: flex;
++  gap: var(--ct6-space-4);
++  align-items: center;
++  justify-content: space-between;
++  border-bottom: 1px solid rgba(61, 70, 82, 0.48);
++  background: rgba(5, 6, 7, 0.78);
++  backdrop-filter: blur(18px);
++  padding: var(--ct6-space-4) var(--ct6-space-8);
++}
++
++.commandBarLabel {
++  margin: 0 0 2px;
++  color: var(--ct6-color-text-muted);
++  font-size: var(--ct6-font-caption-size);
++  letter-spacing: 0.08em;
++  line-height: var(--ct6-font-caption-line-height);
++  text-transform: uppercase;
++}
++
++.commandBar strong {
++  display: block;
++  font-family: var(--ct6-font-family-heading);
++  font-size: 16px;
++  letter-spacing: -0.01em;
++}
++
++.commandBarMeta {
++  display: flex;
++  flex-wrap: wrap;
++  gap: var(--ct6-space-2);
++  justify-content: flex-end;
++}
++
++.commandBarMeta span,
++.sectionMeta span {
++  display: inline-flex;
++  align-items: center;
++  min-height: 28px;
++  border: 1px solid var(--ct6-color-border-subtle);
++  border-radius: var(--ct6-radius-badge);
++  background: rgba(17, 22, 28, 0.64);
++  color: var(--ct6-color-text-secondary);
++  font-size: var(--ct6-font-caption-size);
++  line-height: var(--ct6-font-caption-line-height);
++  padding: 4px 10px;
++}
++
+ .contentShell {
+   min-width: 0;
+   padding: var(--ct6-space-9);
+ }
+ 
+-.guidePage {
+-  max-width: 1180px;
++.guidePage,
++.landingPage {
++  width: min(100%, 1220px);
+   margin: 0 auto;
+ }
+ 
++.landingHero {
++  display: grid;
++  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
++  gap: var(--ct6-space-6);
++  align-items: stretch;
++  margin-bottom: var(--ct6-space-6);
++}
++
++.heroCopy,
++.heroConsole,
++.landingBand,
++.panel,
++.swatchCard,
++.focusCard,
+ .sectionHeader {
+-  margin-bottom: var(--ct6-space-8);
+-  padding: var(--ct6-space-8);
+-  border: 1px solid var(--ct6-color-border-subtle);
+-  border-radius: var(--ct6-radius-xl);
+-  background: linear-gradient(135deg, rgba(17, 22, 28, 0.88), rgba(24, 33, 43, 0.68));
++  position: relative;
++  overflow: hidden;
++  border: 1px solid rgba(61, 70, 82, 0.62);
++  background: linear-gradient(135deg, rgba(17, 22, 28, 0.88), rgba(24, 33, 43, 0.66));
+   box-shadow: var(--ct6-shadow-medium);
+ }
+ 
++.heroCopy::before,
++.heroConsole::before,
++.sectionHeader::before {
++  position: absolute;
++  inset: 0;
++  pointer-events: none;
++  content: '';
++  background:
++    linear-gradient(90deg, rgba(53, 225, 132, 0.14), transparent 38%),
++    radial-gradient(circle at top right, rgba(53, 225, 132, 0.11), transparent 18rem);
++  opacity: 0.9;
++}
++
++.heroCopy {
++  min-height: 460px;
++  border-radius: calc(var(--ct6-radius-xl) + 8px);
++  padding: clamp(var(--ct6-space-7), 6vw, var(--ct6-space-12));
++}
++
++.heroCopy > * {
++  position: relative;
++  z-index: 1;
++}
++
++.heroCopy h1 {
++  max-width: 820px;
++  margin: 0;
++  font-family: var(--ct6-font-family-heading);
++  font-size: clamp(42px, 7vw, 76px);
++  letter-spacing: -0.055em;
++  line-height: 0.94;
++}
++
+ .eyebrow {
+-  margin: 0 0 var(--ct6-space-2);
++  margin: 0 0 var(--ct6-space-3);
+   color: var(--ct6-color-primary-500);
+   font-size: var(--ct6-font-label-size);
+   font-weight: var(--ct6-font-weight-semibold);
+@@ -131,17 +331,6 @@ a {
+   text-transform: uppercase;
+ }
+ 
+-h1, h2, h3 {
+-  font-family: var(--ct6-font-family-heading);
+-}
+-
+-h1 {
+-  margin: 0;
+-  font-size: clamp(32px, 5vw, var(--ct6-font-display-size));
+-  line-height: var(--ct6-font-display-line-height);
+-  letter-spacing: -0.02em;
+-}
+-
+ .summary {
+   max-width: 760px;
+   margin: var(--ct6-space-4) 0 0;
+@@ -150,35 +339,233 @@ h1 {
+   line-height: var(--ct6-font-body-large-line-height);
+ }
+ 
+-.sectionGrid {
++.heroActions {
++  display: flex;
++  flex-wrap: wrap;
++  gap: var(--ct6-space-3);
++  margin-top: var(--ct6-space-7);
++}
++
++.buttonPrimary,
++.buttonSecondary {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  min-height: 44px;
++  border-radius: var(--ct6-radius-button);
++  font-size: var(--ct6-font-button-size);
++  font-weight: var(--ct6-font-weight-semibold);
++  line-height: var(--ct6-font-button-line-height);
++  padding: var(--ct6-space-3) var(--ct6-space-5);
++  transition:
++    transform var(--ct6-motion-fast) var(--ct6-ease-standard),
++    border-color var(--ct6-motion-fast) var(--ct6-ease-standard),
++    background var(--ct6-motion-fast) var(--ct6-ease-standard);
++}
++
++.buttonPrimary:hover,
++.buttonSecondary:hover,
++.focusCard:hover,
++.pageNav a:hover {
++  transform: translateY(-1px);
++}
++
++.buttonPrimary {
++  border: 1px solid rgba(53, 225, 132, 0.84);
++  background: var(--ct6-color-primary-500);
++  color: var(--ct6-color-text-inverse);
++  box-shadow: var(--ct6-shadow-glow-green);
++}
++
++.buttonSecondary {
++  border: 1px solid var(--ct6-color-border-strong);
++  background: rgba(17, 22, 28, 0.72);
++  color: var(--ct6-color-text-primary);
++}
++
++.heroConsole {
++  display: grid;
++  align-content: space-between;
++  border-radius: calc(var(--ct6-radius-xl) + 8px);
++  padding: var(--ct6-space-6);
++}
++
++.heroConsole > * {
++  position: relative;
++  z-index: 1;
++}
++
++.consoleHeader {
++  display: flex;
++  gap: var(--ct6-space-2);
++  align-items: center;
++  justify-content: space-between;
++  border-bottom: 1px solid var(--ct6-color-border-subtle);
++  padding-bottom: var(--ct6-space-4);
++}
++
++.consoleHeader strong {
++  margin-left: var(--ct6-space-2);
++  font-family: var(--ct6-font-family-heading);
++}
++
++.statGrid {
+   display: grid;
+-  gap: var(--ct6-space-5);
+   grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: var(--ct6-space-3);
++  margin: var(--ct6-space-6) 0;
+ }
+ 
+-.panel,
+-.swatchCard {
++.statCard {
+   border: 1px solid var(--ct6-color-border-subtle);
+   border-radius: var(--ct6-radius-card);
+-  background: var(--ct6-color-bg-glass);
+-  box-shadow: var(--ct6-shadow-small);
++  background: rgba(5, 6, 7, 0.36);
++  padding: var(--ct6-space-4);
++}
++
++.statCard dt,
++.consoleReadout span {
++  color: var(--ct6-color-text-muted);
++  font-size: var(--ct6-font-caption-size);
++  letter-spacing: 0.06em;
++  line-height: var(--ct6-font-caption-line-height);
++  text-transform: uppercase;
++}
++
++.statCard dd {
++  margin: var(--ct6-space-2) 0 0;
++  color: var(--ct6-color-text-primary);
++  font-family: var(--ct6-font-family-heading);
++  font-size: 24px;
++  font-weight: var(--ct6-font-weight-bold);
++  letter-spacing: -0.04em;
++}
++
++.consoleReadout {
++  display: grid;
++  gap: var(--ct6-space-2);
++  border: 1px solid rgba(53, 225, 132, 0.24);
++  border-radius: var(--ct6-radius-card);
++  background: rgba(53, 225, 132, 0.06);
++  padding: var(--ct6-space-4);
++}
++
++.consoleReadout strong {
++  font-family: var(--ct6-font-family-heading);
++  font-size: 20px;
++}
++
++.landingBand {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: var(--ct6-space-4);
++  margin-bottom: var(--ct6-space-8);
++  border-radius: var(--ct6-radius-xl);
++  padding: var(--ct6-space-5);
++}
++
++.landingBand div {
++  border: 1px solid var(--ct6-color-border-subtle);
++  border-radius: var(--ct6-radius-card);
++  background: rgba(5, 6, 7, 0.28);
++  padding: var(--ct6-space-5);
++}
++
++.landingBand span {
++  display: block;
++  margin-bottom: var(--ct6-space-2);
++  color: var(--ct6-color-text-muted);
++  font-size: var(--ct6-font-caption-size);
++  letter-spacing: 0.08em;
++  text-transform: uppercase;
++}
++
++.landingBand strong {
++  color: var(--ct6-color-text-primary);
++  font-size: var(--ct6-font-body-compact-size);
++}
++
++.landingSection,
++.landingSplit {
++  margin-top: var(--ct6-space-8);
++}
++
++.landingSectionHeader {
++  display: grid;
++  gap: var(--ct6-space-3);
++  max-width: 820px;
++  margin-bottom: var(--ct6-space-5);
++}
++
++.landingSectionHeader h2,
++.priorityPanel h2,
++.roadmapPanel h2 {
++  margin: 0;
++  font-family: var(--ct6-font-family-heading);
++  font-size: clamp(26px, 4vw, var(--ct6-font-h1-size));
++  letter-spacing: -0.04em;
++  line-height: 1.05;
++}
++
++.focusGrid {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: var(--ct6-space-5);
++}
++
++.focusCard {
++  display: grid;
++  min-height: 230px;
++  align-content: space-between;
++  border-radius: var(--ct6-radius-card);
+   padding: var(--ct6-space-6);
++  transition:
++    transform var(--ct6-motion-fast) var(--ct6-ease-standard),
++    border-color var(--ct6-motion-fast) var(--ct6-ease-standard),
++    background var(--ct6-motion-fast) var(--ct6-ease-standard);
++}
++
++.focusCard:hover {
++  border-color: rgba(53, 225, 132, 0.36);
++  background: linear-gradient(135deg, rgba(17, 22, 28, 0.94), rgba(53, 225, 132, 0.08));
+ }
+ 
++.focusCard h3,
+ .panel h2,
+ .swatchCard h3 {
+   margin: 0 0 var(--ct6-space-3);
++  font-family: var(--ct6-font-family-heading);
+   font-size: var(--ct6-font-h4-size);
+   line-height: var(--ct6-font-h4-line-height);
+ }
+ 
++.focusCard p,
+ .panel p,
+ .panel li,
+ .swatchCard p,
+-.swatchCard small {
++.swatchCard small,
++.roadmapItem p {
+   color: var(--ct6-color-text-secondary);
+ }
+ 
++.focusCard span {
++  color: var(--ct6-color-primary-500);
++  font-size: var(--ct6-font-body-compact-size);
++  font-weight: var(--ct6-font-weight-semibold);
++}
++
++.landingSplit {
++  display: grid;
++  grid-template-columns: 0.85fr 1.15fr;
++  gap: var(--ct6-space-5);
++}
++
++.panel,
++.swatchCard {
++  border-radius: var(--ct6-radius-card);
++  padding: var(--ct6-space-6);
++}
++
+ .panel ul {
+   margin: 0;
+   padding-left: var(--ct6-space-5);
+@@ -188,6 +575,121 @@ h1 {
+   margin-top: var(--ct6-space-2);
+ }
+ 
++.checkList {
++  display: grid;
++  gap: var(--ct6-space-3);
++  margin-top: var(--ct6-space-5) !important;
++  padding: 0 !important;
++  list-style: none;
++}
++
++.checkList li {
++  position: relative;
++  border: 1px solid var(--ct6-color-border-subtle);
++  border-radius: var(--ct6-radius-sm);
++  background: rgba(5, 6, 7, 0.24);
++  padding: var(--ct6-space-3) var(--ct6-space-3) var(--ct6-space-3) var(--ct6-space-7);
++}
++
++.checkList li::before {
++  position: absolute;
++  left: var(--ct6-space-3);
++  color: var(--ct6-color-primary-500);
++  content: '✓';
++}
++
++.roadmapList {
++  display: grid;
++  gap: var(--ct6-space-3);
++  margin-top: var(--ct6-space-5);
++}
++
++.roadmapItem {
++  display: grid;
++  grid-template-columns: 72px 1fr auto;
++  gap: var(--ct6-space-4);
++  align-items: start;
++  border: 1px solid var(--ct6-color-border-subtle);
++  border-radius: var(--ct6-radius-card);
++  background: rgba(5, 6, 7, 0.22);
++  padding: var(--ct6-space-4);
++}
++
++.roadmapItem > span,
++.roadmapItem em {
++  color: var(--ct6-color-primary-500);
++  font-family: var(--ct6-font-family-mono);
++  font-size: 11px;
++  font-style: normal;
++  letter-spacing: 0.04em;
++  line-height: 1.4;
++  text-transform: uppercase;
++}
++
++.roadmapItem strong {
++  display: block;
++  margin-bottom: var(--ct6-space-1);
++}
++
++.roadmapItem p {
++  margin: 0;
++  font-size: var(--ct6-font-body-compact-size);
++  line-height: var(--ct6-font-body-compact-line-height);
++}
++
++.sectionHeader {
++  margin-bottom: var(--ct6-space-8);
++  border-radius: calc(var(--ct6-radius-xl) + 4px);
++  padding: clamp(var(--ct6-space-6), 5vw, var(--ct6-space-9));
++}
++
++.sectionHeader > * {
++  position: relative;
++  z-index: 1;
++}
++
++.sectionHeaderGrid {
++  display: grid;
++  grid-template-columns: minmax(0, 1fr) auto;
++  gap: var(--ct6-space-6);
++  align-items: start;
++}
++
++.sectionHeader h1 {
++  margin: 0;
++  font-family: var(--ct6-font-family-heading);
++  font-size: clamp(34px, 5vw, var(--ct6-font-display-size));
++  letter-spacing: -0.04em;
++  line-height: 1;
++}
++
++.sectionMeta {
++  display: flex;
++  flex-wrap: wrap;
++  gap: var(--ct6-space-2);
++  justify-content: flex-end;
++  max-width: 260px;
++}
++
++.sectionGrid {
++  display: grid;
++  gap: var(--ct6-space-5);
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++}
++
++.guidePanel {
++  min-height: 210px;
++}
++
++.panelIndex {
++  display: inline-flex;
++  margin-bottom: var(--ct6-space-5);
++  color: var(--ct6-color-primary-500);
++  font-family: var(--ct6-font-family-mono);
++  font-size: var(--ct6-font-caption-size);
++  letter-spacing: 0.08em;
++}
++
+ .swatchGrid {
+   display: grid;
+   gap: var(--ct6-space-5);
+@@ -250,6 +752,61 @@ td {
+   color: var(--ct6-color-text-secondary);
+ }
+ 
++.pageNav {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: var(--ct6-space-4);
++  margin-top: var(--ct6-space-8);
++}
++
++.pageNav a {
++  display: grid;
++  gap: var(--ct6-space-1);
++  border: 1px solid var(--ct6-color-border-subtle);
++  border-radius: var(--ct6-radius-card);
++  background: rgba(17, 22, 28, 0.62);
++  padding: var(--ct6-space-5);
++  transition:
++    transform var(--ct6-motion-fast) var(--ct6-ease-standard),
++    border-color var(--ct6-motion-fast) var(--ct6-ease-standard),
++    background var(--ct6-motion-fast) var(--ct6-ease-standard);
++}
++
++.pageNav a:hover {
++  border-color: rgba(53, 225, 132, 0.28);
++  background: rgba(53, 225, 132, 0.06);
++}
++
++.pageNav span {
++  color: var(--ct6-color-text-muted);
++  font-size: var(--ct6-font-caption-size);
++  letter-spacing: 0.08em;
++  text-transform: uppercase;
++}
++
++.pageNav strong {
++  font-family: var(--ct6-font-family-heading);
++}
++
++.pageNavNext {
++  text-align: right;
++}
++
++@media (max-width: 1160px) {
++  .brandShell {
++    grid-template-columns: 280px minmax(0, 1fr);
++  }
++
++  .landingHero,
++  .landingSplit {
++    grid-template-columns: 1fr;
++  }
++
++  .focusGrid {
++    grid-template-columns: 1fr;
++  }
++}
++
+ @media (max-width: 900px) {
+   .brandShell {
+     grid-template-columns: 1fr;
+@@ -259,27 +816,84 @@ td {
+     position: relative;
+     height: auto;
+     max-height: none;
++    border-right: 0;
++    border-bottom: 1px solid var(--ct6-color-border-subtle);
+   }
+ 
+   .navList {
+     grid-template-columns: repeat(2, minmax(0, 1fr));
+   }
+ 
++  .commandBar {
++    position: relative;
++    padding: var(--ct6-space-4) var(--ct6-space-5);
++  }
++
+   .contentShell {
+     padding: var(--ct6-space-5);
+   }
+ 
+-  .sectionHeader {
+-    padding: var(--ct6-space-6);
++  .sectionHeaderGrid,
++  .sectionGrid,
++  .landingBand,
++  .pageNav {
++    grid-template-columns: 1fr;
++  }
++
++  .sectionMeta,
++  .commandBarMeta {
++    justify-content: flex-start;
+   }
+ 
+-  .sectionGrid {
++  .heroCopy {
++    min-height: auto;
++  }
++}
++
++@media (max-width: 620px) {
++  .brandLockup {
++    grid-template-columns: 44px 1fr;
++  }
++
++  .brandMark {
++    width: 44px;
++    height: 44px;
++  }
++
++  .navList {
++    grid-template-columns: 1fr;
++  }
++
++  .commandBar {
++    align-items: flex-start;
++    flex-direction: column;
++  }
++
++  .heroCopy,
++  .heroConsole,
++  .panel,
++  .sectionHeader,
++  .landingBand {
++    border-radius: var(--ct6-radius-card);
++  }
++
++  .statGrid {
+     grid-template-columns: 1fr;
+   }
++
++  .roadmapItem {
++    grid-template-columns: 1fr;
++  }
++
++  .pageNavNext {
++    text-align: left;
++  }
+ }
+ 
+ @media (prefers-reduced-motion: reduce) {
+-  *, *::before, *::after {
++  *,
++  *::before,
++  *::after {
+     animation-duration: 0.01ms !important;
+     animation-iteration-count: 1 !important;
+     scroll-behavior: auto !important;
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index 4c0bc51..366c7fb 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -1,10 +1,10 @@
+ import { BrandShell } from '@/components/BrandShell';
+-import { GuidePage } from '@/components/GuidePage';
++import { LandingPage } from '@/components/LandingPage';
+ 
+ export default function HomePage() {
+   return (
+-    <BrandShell>
+-      <GuidePage slug="overview" />
++    <BrandShell activeSlug="overview">
++      <LandingPage />
+     </BrandShell>
+   );
+ }
+diff --git a/src/components/BrandShell.tsx b/src/components/BrandShell.tsx
+index 80d10e2..63216df 100644
+--- a/src/components/BrandShell.tsx
++++ b/src/components/BrandShell.tsx
+@@ -1,10 +1,27 @@
++import type { ReactNode } from 'react';
+ import { Sidebar } from './Sidebar';
++import { getNavigationItem } from '@/data/navigation';
++
++export function BrandShell({ children, activeSlug = 'overview' }: { children: ReactNode; activeSlug?: string }) {
++  const activeItem = getNavigationItem(activeSlug);
+ 
+-export function BrandShell({ children }: { children: React.ReactNode }) {
+   return (
+     <div className="brandShell">
+-      <Sidebar />
+-      <main className="contentShell">{children}</main>
++      <Sidebar activeSlug={activeSlug} />
++      <div className="mainShell">
++        <header className="commandBar" aria-label="Current guideline section">
++          <div>
++            <p className="commandBarLabel">CT6 Brand System</p>
++            <strong>{activeItem?.label ?? 'Overview'}</strong>
++          </div>
++          <div className="commandBarMeta" aria-label="Project metadata">
++            <span>Command Glass Ops</span>
++            <span>v1.4</span>
++            <span>Static</span>
++          </div>
++        </header>
++        <main className="contentShell">{children}</main>
++      </div>
+     </div>
+   );
+ }
+diff --git a/src/components/GuidePage.tsx b/src/components/GuidePage.tsx
+index 510fd94..0776906 100644
+--- a/src/components/GuidePage.tsx
++++ b/src/components/GuidePage.tsx
+@@ -1,17 +1,27 @@
+ import { guideContent } from '@/data/guideContent';
++import { getAdjacentNavigation, getNavigationItem } from '@/data/navigation';
+ import { SectionHeader } from './SectionHeader';
+ import { ColorSwatches } from './ColorSwatches';
+ import { TokenTables } from './TokenTables';
+ 
+ export function GuidePage({ slug }: { slug: string }) {
+   const page = guideContent[slug] ?? guideContent.overview;
++  const current = getNavigationItem(slug);
++  const { previous, next } = getAdjacentNavigation(slug);
+ 
+   return (
+     <article className="guidePage">
+-      <SectionHeader eyebrow={page.eyebrow} title={page.title} summary={page.summary} />
++      <SectionHeader
++        eyebrow={page.eyebrow}
++        title={page.title}
++        summary={page.summary}
++        meta={[current?.index ? `Section ${current.index}` : 'Guideline', current?.group ?? 'Brand System', 'Static reference']}
++      />
++
+       <div className="sectionGrid">
+-        {page.sections.map((section) => (
+-          <section className="panel" key={section.heading}>
++        {page.sections.map((section, index) => (
++          <section className="panel guidePanel" key={section.heading}>
++            <span className="panelIndex">{String(index + 1).padStart(2, '0')}</span>
+             <h2>{section.heading}</h2>
+             {section.body ? <p>{section.body}</p> : null}
+             {section.bullets ? (
+@@ -22,8 +32,24 @@ export function GuidePage({ slug }: { slug: string }) {
+           </section>
+         ))}
+       </div>
++
+       {slug === 'colors' ? <ColorSwatches /> : null}
+       {slug === 'tokens' || slug === 'colors' || slug === 'typography' || slug === 'layout' ? <TokenTables variant={slug} /> : null}
++
++      <footer className="pageNav" aria-label="Section navigation">
++        {previous ? (
++          <a href={previous.href}>
++            <span>Previous</span>
++            <strong>{previous.label}</strong>
++          </a>
++        ) : <span />}
++        {next ? (
++          <a href={next.href} className="pageNavNext">
++            <span>Next</span>
++            <strong>{next.label}</strong>
++          </a>
++        ) : <span />}
++      </footer>
+     </article>
+   );
+ }
+diff --git a/src/components/SectionHeader.tsx b/src/components/SectionHeader.tsx
+index eab14b4..b33fbd0 100644
+--- a/src/components/SectionHeader.tsx
++++ b/src/components/SectionHeader.tsx
+@@ -1,9 +1,28 @@
+-export function SectionHeader({ eyebrow, title, summary }: { eyebrow: string; title: string; summary: string }) {
++export function SectionHeader({
++  eyebrow,
++  title,
++  summary,
++  meta = [],
++}: {
++  eyebrow: string;
++  title: string;
++  summary: string;
++  meta?: string[];
++}) {
+   return (
+     <header className="sectionHeader">
+-      <p className="eyebrow">{eyebrow}</p>
+-      <h1>{title}</h1>
+-      <p className="summary">{summary}</p>
++      <div className="sectionHeaderGrid">
++        <div>
++          <p className="eyebrow">{eyebrow}</p>
++          <h1>{title}</h1>
++          <p className="summary">{summary}</p>
++        </div>
++        {meta.length ? (
++          <div className="sectionMeta" aria-label="Page metadata">
++            {meta.map((item) => <span key={item}>{item}</span>)}
++          </div>
++        ) : null}
++      </div>
+     </header>
+   );
+ }
+diff --git a/src/components/Sidebar.tsx b/src/components/Sidebar.tsx
+index d5f08f5..6c28fd7 100644
+--- a/src/components/Sidebar.tsx
++++ b/src/components/Sidebar.tsx
+@@ -1,18 +1,45 @@
+-import { navigation } from '@/data/navigation';
++import { navigation, navigationGroups } from '@/data/navigation';
+ 
+-export function Sidebar() {
++export function Sidebar({ activeSlug = 'overview' }: { activeSlug?: string }) {
+   return (
+     <aside className="sidebar" aria-label="Brand guideline navigation">
+       <a className="brandLockup" href="/" aria-label="CT6 Companion brand guideline home">
+-        <span className="brandMark">CT6</span>
+-        <span>
++        <span className="brandMark" aria-hidden="true">CT6</span>
++        <span className="brandLockupText">
+           <strong>CT6 Companion</strong>
+           <small>Brand Command Manual</small>
+         </span>
+       </a>
++
++      <div className="sidebarStatus" aria-label="Static app status">
++        <span className="statusDot" aria-hidden="true" />
++        <span>Static guideline app</span>
++      </div>
++
+       <nav className="navList">
+-        {navigation.map((item) => (
+-          <a key={item.slug} href={item.href}>{item.label}</a>
++        {navigationGroups.map((group) => (
++          <section className="navGroup" key={group} aria-label={group}>
++            <h2>{group}</h2>
++            <div className="navGroupLinks">
++              {navigation
++                .filter((item) => item.group === group)
++                .map((item) => {
++                  const isActive = item.slug === activeSlug;
++
++                  return (
++                    <a
++                      key={item.slug}
++                      href={item.href}
++                      aria-current={isActive ? 'page' : undefined}
++                      className={isActive ? 'isActive' : undefined}
++                    >
++                      <span className="navIndex">{item.index}</span>
++                      <span>{item.label}</span>
++                    </a>
++                  );
++                })}
++            </div>
++          </section>
+         ))}
+       </nav>
+     </aside>
+diff --git a/src/data/navigation.ts b/src/data/navigation.ts
+index 8c63456..97e5bd5 100644
+--- a/src/data/navigation.ts
++++ b/src/data/navigation.ts
+@@ -1,122 +1,69 @@
+-export const navigation = [
+-  {
+-    "slug": "overview",
+-    "label": "Overview",
+-    "href": "/overview"
+-  },
+-  {
+-    "slug": "foundation",
+-    "label": "Brand Foundation",
+-    "href": "/foundation"
+-  },
+-  {
+-    "slug": "strategy",
+-    "label": "Brand Strategy",
+-    "href": "/strategy"
+-  },
+-  {
+-    "slug": "logo",
+-    "label": "Logo System",
+-    "href": "/logo"
+-  },
+-  {
+-    "slug": "app-icon",
+-    "label": "App Icon",
+-    "href": "/app-icon"
+-  },
+-  {
+-    "slug": "colors",
+-    "label": "Color System",
+-    "href": "/colors"
+-  },
+-  {
+-    "slug": "typography",
+-    "label": "Typography",
+-    "href": "/typography"
+-  },
+-  {
+-    "slug": "layout",
+-    "label": "Layout & Spacing",
+-    "href": "/layout"
+-  },
+-  {
+-    "slug": "components",
+-    "label": "UI Components",
+-    "href": "/components"
+-  },
+-  {
+-    "slug": "iconography",
+-    "label": "Iconography",
+-    "href": "/iconography"
+-  },
+-  {
+-    "slug": "illustration",
+-    "label": "Illustration",
+-    "href": "/illustration"
+-  },
+-  {
+-    "slug": "imagery",
+-    "label": "Photography & Imagery",
+-    "href": "/imagery"
+-  },
+-  {
+-    "slug": "motion",
+-    "label": "Motion & Interaction",
+-    "href": "/motion"
+-  },
+-  {
+-    "slug": "voice-tone",
+-    "label": "Voice & Tone",
+-    "href": "/voice-tone"
+-  },
+-  {
+-    "slug": "microcopy",
+-    "label": "Microcopy",
+-    "href": "/microcopy"
+-  },
+-  {
+-    "slug": "accessibility",
+-    "label": "Accessibility",
+-    "href": "/accessibility"
+-  },
+-  {
+-    "slug": "themes",
+-    "label": "Dark & Light Mode",
+-    "href": "/themes"
+-  },
+-  {
+-    "slug": "app-store",
+-    "label": "App Store",
+-    "href": "/app-store"
+-  },
+-  {
+-    "slug": "social",
+-    "label": "Social Media",
+-    "href": "/social"
+-  },
+-  {
+-    "slug": "email-notifications",
+-    "label": "Email & Notifications",
+-    "href": "/email-notifications"
+-  },
+-  {
+-    "slug": "tokens",
+-    "label": "Design Tokens",
+-    "href": "/tokens"
+-  },
+-  {
+-    "slug": "do-dont",
+-    "label": "Do & Don\u2019t",
+-    "href": "/do-dont"
+-  },
+-  {
+-    "slug": "assets",
+-    "label": "Asset Checklist",
+-    "href": "/assets"
+-  },
+-  {
+-    "slug": "implementation",
+-    "label": "Implementation Checklist",
+-    "href": "/implementation"
+-  }
++export type NavigationGroup =
++  | 'Command'
++  | 'Identity'
++  | 'Design System'
++  | 'Experience'
++  | 'Launch'
++  | 'Governance';
++
++export type NavigationItem = {
++  slug: string;
++  label: string;
++  href: string;
++  group: NavigationGroup;
++  index: string;
++};
++
++export const navigation: readonly NavigationItem[] = [
++  { slug: 'overview', label: 'Overview', href: '/overview', group: 'Command', index: '01' },
++  { slug: 'foundation', label: 'Brand Foundation', href: '/foundation', group: 'Command', index: '02' },
++  { slug: 'strategy', label: 'Brand Strategy', href: '/strategy', group: 'Command', index: '03' },
++
++  { slug: 'logo', label: 'Logo System', href: '/logo', group: 'Identity', index: '04' },
++  { slug: 'app-icon', label: 'App Icon', href: '/app-icon', group: 'Identity', index: '05' },
++
++  { slug: 'colors', label: 'Color System', href: '/colors', group: 'Design System', index: '06' },
++  { slug: 'typography', label: 'Typography', href: '/typography', group: 'Design System', index: '07' },
++  { slug: 'layout', label: 'Layout & Spacing', href: '/layout', group: 'Design System', index: '08' },
++  { slug: 'components', label: 'UI Components', href: '/components', group: 'Design System', index: '09' },
++  { slug: 'iconography', label: 'Iconography', href: '/iconography', group: 'Design System', index: '10' },
++  { slug: 'illustration', label: 'Illustration', href: '/illustration', group: 'Design System', index: '11' },
++  { slug: 'imagery', label: 'Photography & Imagery', href: '/imagery', group: 'Design System', index: '12' },
++  { slug: 'motion', label: 'Motion & Interaction', href: '/motion', group: 'Design System', index: '13' },
++
++  { slug: 'voice-tone', label: 'Voice & Tone', href: '/voice-tone', group: 'Experience', index: '14' },
++  { slug: 'microcopy', label: 'Microcopy', href: '/microcopy', group: 'Experience', index: '15' },
++  { slug: 'accessibility', label: 'Accessibility', href: '/accessibility', group: 'Experience', index: '16' },
++  { slug: 'themes', label: 'Dark & Light Mode', href: '/themes', group: 'Experience', index: '17' },
++
++  { slug: 'app-store', label: 'App Store', href: '/app-store', group: 'Launch', index: '18' },
++  { slug: 'social', label: 'Social Media', href: '/social', group: 'Launch', index: '19' },
++  { slug: 'email-notifications', label: 'Email & Notifications', href: '/email-notifications', group: 'Launch', index: '20' },
++
++  { slug: 'tokens', label: 'Design Tokens', href: '/tokens', group: 'Governance', index: '21' },
++  { slug: 'do-dont', label: 'Do & Don’t', href: '/do-dont', group: 'Governance', index: '22' },
++  { slug: 'assets', label: 'Asset Checklist', href: '/assets', group: 'Governance', index: '23' },
++  { slug: 'implementation', label: 'Implementation Checklist', href: '/implementation', group: 'Governance', index: '24' },
+ ] as const;
++
++export const navigationGroups: readonly NavigationGroup[] = [
++  'Command',
++  'Identity',
++  'Design System',
++  'Experience',
++  'Launch',
++  'Governance',
++] as const;
++
++export function getNavigationItem(slug: string) {
++  return navigation.find((item) => item.slug === slug);
++}
++
++export function getAdjacentNavigation(slug: string) {
++  const index = navigation.findIndex((item) => item.slug === slug);
++
++  return {
++    previous: index > 0 ? navigation[index - 1] : undefined,
++    next: index >= 0 && index < navigation.length - 1 ? navigation[index + 1] : undefined,
++  };
++}
+diff --git a/vercel.json b/vercel.json
+index 7e02561..57494a2 100644
+--- a/vercel.json
++++ b/vercel.json
+@@ -1,5 +1,4 @@
+ {
+   "buildCommand": "npm run build",
+-  "framework": "nextjs",
+-  "trailingSlash": true
++  "outputDirectory": "out"
+ }

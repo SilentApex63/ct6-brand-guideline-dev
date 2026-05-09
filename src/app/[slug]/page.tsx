@@ -14,7 +14,7 @@ export default function StaticGuidePage({ params }: { params: { slug: string } }
   }
 
   return (
-    <BrandShell>
+    <BrandShell activeSlug={params.slug}>
       <GuidePage slug={params.slug} />
     </BrandShell>
   );
