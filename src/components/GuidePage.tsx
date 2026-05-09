@@ -8,6 +8,8 @@ import { ColorSystemShowcase } from './ColorSystemShowcase';
 import { TypographyShowcase } from './TypographyShowcase';
 import { TokenSystemShowcase } from './TokenSystemShowcase';
 import { IdentityShowcase } from './IdentityShowcase';
+import { VoiceToneShowcase } from './VoiceToneShowcase';
+import { MicrocopyShowcase } from './MicrocopyShowcase';
 
 export function GuidePage({ slug }: { slug: string }) {
   const page = guideContent[slug] ?? guideContent.overview;
@@ -43,6 +45,8 @@ export function GuidePage({ slug }: { slug: string }) {
       {slug === 'tokens' ? <TokenSystemShowcase /> : null}
       {slug === 'components' ? <ComponentShowcase /> : null}
       {slug === 'logo' || slug === 'app-icon' || slug === 'assets' ? <IdentityShowcase variant={slug} /> : null}
+      {slug === 'voice-tone' ? <VoiceToneShowcase /> : null}
+      {slug === 'microcopy' ? <MicrocopyShowcase /> : null}
       {slug === 'colors' ? <ColorSwatches /> : null}
       {slug === 'tokens' || slug === 'colors' || slug === 'typography' || slug === 'layout' ? <TokenTables variant={slug} /> : null}
 

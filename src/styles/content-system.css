@@ -1,0 +1,288 @@
+/* === CT6 Phase 6 Voice, Tone, and Microcopy === */
+.contentSystemShowcase {
+  display: grid;
+  gap: var(--ct6-space-6);
+  margin-top: var(--ct6-space-8);
+}
+
+.contentHeroPanel,
+.voicePrincipleCard,
+.toneRulesPanel,
+.wordPanel,
+.toneExamplePanel,
+.copyPatternCard,
+.copyLivePanel,
+.copyFormPanel,
+.navLabelPanel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(61, 70, 82, 0.62);
+  border-radius: var(--ct6-radius-card);
+  background: linear-gradient(135deg, rgba(17, 22, 28, 0.9), rgba(24, 33, 43, 0.62));
+  box-shadow: var(--ct6-shadow-medium);
+  padding: var(--ct6-space-6);
+}
+
+.contentHeroPanel::before,
+.toneRulesPanel::before,
+.copyLivePanel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(circle at top right, rgba(53, 225, 132, 0.1), transparent 18rem);
+}
+
+.contentHeroPanel > *,
+.toneRulesPanel > *,
+.copyLivePanel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.contentHeroPanel h2,
+.contentPanelHeader h2 {
+  margin: 0;
+  font-family: var(--ct6-font-family-heading);
+  font-size: clamp(28px, 4vw, var(--ct6-font-h1-size));
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.contentHeroPanel p,
+.contentPanelHeader p,
+.voicePrincipleCard p,
+.toneRuleGrid p,
+.wordPanel span,
+.copyPatternCard p,
+.copyPatternCard li,
+.copyLiveCard p,
+.copyFormExample small,
+.navLabelPanel p {
+  color: var(--ct6-color-text-secondary);
+}
+
+.contentHeroPanel p,
+.contentPanelHeader p {
+  max-width: 820px;
+  margin: var(--ct6-space-3) 0 0;
+}
+
+.voicePrincipleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--ct6-space-5);
+}
+
+.voicePrincipleCard {
+  display: grid;
+  gap: var(--ct6-space-3);
+}
+
+.voicePrincipleCard span,
+.copyPatternCard span,
+.copyLiveCard span {
+  color: var(--ct6-color-primary-500);
+  font-family: var(--ct6-font-family-mono);
+  font-size: var(--ct6-font-caption-size);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.voicePrincipleCard p,
+.copyPatternCard p {
+  margin: 0;
+}
+
+.voicePrincipleCard code {
+  display: block;
+  border: 1px solid rgba(53, 225, 132, 0.2);
+  border-radius: var(--ct6-radius-sm);
+  background: rgba(53, 225, 132, 0.06);
+  color: var(--ct6-color-text-primary);
+  font-family: var(--ct6-font-family-body);
+  font-size: var(--ct6-font-body-compact-size);
+  padding: var(--ct6-space-3);
+}
+
+.toneRuleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--ct6-space-4);
+  margin-top: var(--ct6-space-5);
+}
+
+.toneRuleGrid article {
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-card);
+  background: rgba(5, 6, 7, 0.24);
+  padding: var(--ct6-space-4);
+}
+
+.toneRuleGrid strong {
+  display: block;
+  margin-bottom: var(--ct6-space-2);
+  font-family: var(--ct6-font-family-heading);
+}
+
+.toneRuleGrid p {
+  margin: 0;
+  font-size: var(--ct6-font-body-compact-size);
+  line-height: var(--ct6-font-body-compact-line-height);
+}
+
+.wordListGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ct6-space-5);
+}
+
+.wordPanel h3,
+.copyPatternCard h3 {
+  margin: 0 0 var(--ct6-space-4);
+  font-family: var(--ct6-font-family-heading);
+}
+
+.wordGrid,
+.navLabelGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ct6-space-2);
+}
+
+.wordGrid span,
+.navLabelGrid span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-badge);
+  background: rgba(17, 22, 28, 0.68);
+  font-size: var(--ct6-font-body-compact-size);
+  padding: 5px 10px;
+}
+
+.wordPanel-use .wordGrid span {
+  border-color: rgba(53, 225, 132, 0.25);
+  color: var(--ct6-color-primary-500);
+}
+
+.wordPanel-avoid .wordGrid span {
+  border-color: rgba(255, 77, 77, 0.25);
+  color: #ff8a8a;
+}
+
+.toneExampleTableWrap {
+  margin-top: var(--ct6-space-5);
+  overflow-x: auto;
+}
+
+.toneExampleTable td {
+  min-width: 180px;
+}
+
+.badCopy {
+  color: #ff8a8a;
+}
+
+.goodCopy {
+  color: var(--ct6-color-primary-500);
+}
+
+.copyPatternGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--ct6-space-5);
+}
+
+.copyPatternCard ul {
+  display: grid;
+  gap: var(--ct6-space-2);
+  margin: var(--ct6-space-4) 0 0;
+  padding-left: var(--ct6-space-5);
+}
+
+.copyLiveGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--ct6-space-4);
+  margin-top: var(--ct6-space-5);
+}
+
+.copyLiveCard {
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-card);
+  background: rgba(5, 6, 7, 0.3);
+  padding: var(--ct6-space-5);
+}
+
+.copyLiveCard strong {
+  display: block;
+  margin: var(--ct6-space-3) 0 var(--ct6-space-1);
+  font-family: var(--ct6-font-family-heading);
+}
+
+.copyToastSuccess {
+  border-left: 4px solid var(--ct6-color-semantic-success-500);
+}
+
+.copyToastError {
+  border-left: 4px solid var(--ct6-color-semantic-error-500);
+}
+
+.copyToastEmpty {
+  border-left: 4px solid var(--ct6-color-semantic-info-500);
+}
+
+.copyFormExample {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--ct6-space-4);
+  margin-top: var(--ct6-space-5);
+}
+
+.copyFormExample label {
+  display: grid;
+  gap: var(--ct6-space-2);
+}
+
+.copyFormExample label > span {
+  color: var(--ct6-color-text-primary);
+  font-size: var(--ct6-font-label-size);
+  font-weight: var(--ct6-font-weight-semibold);
+}
+
+.copyFormExample input {
+  min-height: 44px;
+  border: 1px solid var(--ct6-color-border-strong);
+  border-radius: var(--ct6-radius-input);
+  background: rgba(5, 6, 7, 0.35);
+  color: var(--ct6-color-text-primary);
+  padding: var(--ct6-space-3) var(--ct6-space-4);
+}
+
+.copyFormExample input:focus {
+  border-color: var(--ct6-color-border-active);
+}
+
+.copyFieldError input {
+  border-color: var(--ct6-color-border-danger);
+}
+
+.copyFieldError small {
+  color: #ff8a8a;
+}
+
+.navLabelGrid {
+  margin-top: var(--ct6-space-5);
+}
+
+.navLabelGrid span {
+  color: var(--ct6-color-text-primary);
+}
+
+@media (max-width: 900px) {
+  .wordListGrid {
+    grid-template-columns: 1fr;
+  }
+}

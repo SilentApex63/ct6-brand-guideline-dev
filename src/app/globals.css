@@ -1,5 +1,6 @@
 @import '../styles/tokens.css';
 @import '../styles/identity.css';
+@import '../styles/content-system.css';
 
 * {
   box-sizing: border-box;
