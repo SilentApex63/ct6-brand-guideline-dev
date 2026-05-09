@@ -900,3 +900,418 @@ td {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* === CT6 Phase 3 Component System Showcase === */
+.componentShowcase {
+  display: grid;
+  gap: var(--ct6-space-6);
+  margin-top: var(--ct6-space-8);
+}
+
+.componentIntroPanel,
+.componentPreviewPanel,
+.componentSpecCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(61, 70, 82, 0.62);
+  border-radius: var(--ct6-radius-card);
+  background: linear-gradient(135deg, rgba(17, 22, 28, 0.88), rgba(24, 33, 43, 0.62));
+  box-shadow: var(--ct6-shadow-medium);
+  padding: var(--ct6-space-6);
+}
+
+.componentIntroPanel::before,
+.componentPreviewPanel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(circle at top right, rgba(53, 225, 132, 0.1), transparent 18rem);
+}
+
+.componentIntroPanel > *,
+.componentPreviewPanel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.componentIntroPanel h2,
+.componentPreviewHeader h2,
+.componentSpecHeader h3 {
+  margin: 0;
+  font-family: var(--ct6-font-family-heading);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.componentIntroPanel h2,
+.componentPreviewHeader h2 {
+  font-size: clamp(26px, 4vw, var(--ct6-font-h1-size));
+}
+
+.componentIntroPanel p,
+.componentPreviewHeader p,
+.componentSpecHeader p,
+.componentSpecGrid dd,
+.componentRuleColumns li,
+.fieldGroup small,
+.missionCardExample p,
+.toastExample span,
+.emptyStateExample p {
+  color: var(--ct6-color-text-secondary);
+}
+
+.componentIntroPanel p,
+.componentPreviewHeader p {
+  max-width: 780px;
+  margin: var(--ct6-space-3) 0 0;
+}
+
+.componentPreviewHeader {
+  margin-bottom: var(--ct6-space-5);
+}
+
+.buttonDemoGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ct6-space-3);
+  align-items: center;
+}
+
+.componentTextButton,
+.componentIconButton,
+.componentDangerButton,
+.componentDisabledButton {
+  min-height: 44px;
+  border-radius: var(--ct6-radius-button);
+  font-size: var(--ct6-font-button-size);
+  font-weight: var(--ct6-font-weight-semibold);
+  line-height: var(--ct6-font-button-line-height);
+  padding: var(--ct6-space-3) var(--ct6-space-5);
+}
+
+.componentTextButton {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ct6-color-primary-500);
+}
+
+.componentIconButton {
+  width: 44px;
+  padding: 0;
+  border: 1px solid var(--ct6-color-border-strong);
+  background: rgba(17, 22, 28, 0.72);
+  color: var(--ct6-color-text-primary);
+}
+
+.componentDangerButton {
+  border: 1px solid rgba(255, 77, 77, 0.62);
+  background: rgba(255, 77, 77, 0.1);
+  color: #ff8f8f;
+}
+
+.componentDisabledButton {
+  border: 1px solid rgba(84, 94, 106, 0.44);
+  background: rgba(84, 94, 106, 0.16);
+  color: var(--ct6-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.formPreviewGrid,
+.cardPreviewGrid,
+.feedbackPreviewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ct6-space-4);
+}
+
+.cardPreviewGrid,
+.feedbackPreviewGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fieldGroup {
+  display: grid;
+  gap: var(--ct6-space-2);
+}
+
+.fieldGroup span {
+  color: var(--ct6-color-text-primary);
+  font-size: var(--ct6-font-label-size);
+  font-weight: var(--ct6-font-weight-semibold);
+  line-height: var(--ct6-font-label-line-height);
+}
+
+.fieldGroup input,
+.fieldGroup select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--ct6-color-border-strong);
+  border-radius: var(--ct6-radius-input);
+  background: rgba(5, 6, 7, 0.34);
+  color: var(--ct6-color-text-primary);
+  padding: var(--ct6-space-3) var(--ct6-space-4);
+}
+
+.fieldGroup input:focus,
+.fieldGroup select:focus {
+  border-color: var(--ct6-color-border-active);
+  box-shadow: var(--ct6-shadow-focus);
+  outline: none;
+}
+
+.fieldGroupError input {
+  border-color: var(--ct6-color-border-danger);
+}
+
+.fieldGroupError small {
+  color: #ff9a9a;
+}
+
+.missionCardExample {
+  display: grid;
+  gap: var(--ct6-space-4);
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-card);
+  background: rgba(5, 6, 7, 0.3);
+  padding: var(--ct6-space-5);
+}
+
+.premiumCardExample {
+  border-color: rgba(199, 164, 74, 0.38);
+  background: linear-gradient(135deg, rgba(199, 164, 74, 0.09), rgba(5, 6, 7, 0.28));
+}
+
+.missionCardTop,
+.missionMetaGrid,
+.badgeDemoRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ct6-space-2);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.missionCardExample h3,
+.emptyStateExample h3 {
+  margin: 0;
+  font-family: var(--ct6-font-family-heading);
+  font-size: var(--ct6-font-h4-size);
+}
+
+.missionCardExample p,
+.emptyStateExample p {
+  margin: 0;
+}
+
+.componentCode {
+  color: var(--ct6-color-text-muted);
+  font-family: var(--ct6-font-family-mono);
+  font-size: 11px;
+}
+
+.missionMetaGrid {
+  justify-content: flex-start;
+}
+
+.missionMetaGrid span {
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-sm);
+  background: rgba(17, 22, 28, 0.52);
+  color: var(--ct6-color-text-secondary);
+  font-size: var(--ct6-font-caption-size);
+  padding: var(--ct6-space-2) var(--ct6-space-3);
+}
+
+.missionMetaGrid strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--ct6-color-text-primary);
+}
+
+.statusBadge,
+.componentChip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  border: 1px solid rgba(170, 179, 190, 0.22);
+  border-radius: var(--ct6-radius-badge);
+  background: rgba(170, 179, 190, 0.08);
+  color: var(--ct6-color-text-secondary);
+  font-size: 11px;
+  font-weight: var(--ct6-font-weight-semibold);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.statusReady,
+.statusSynced {
+  border-color: rgba(53, 225, 132, 0.42);
+  background: rgba(53, 225, 132, 0.1);
+  color: var(--ct6-color-primary-500);
+}
+
+.statusPending {
+  border-color: rgba(244, 184, 96, 0.42);
+  background: rgba(244, 184, 96, 0.1);
+  color: #f4c77c;
+}
+
+.statusCritical,
+.statusError {
+  border-color: rgba(255, 77, 77, 0.48);
+  background: rgba(255, 77, 77, 0.1);
+  color: #ff8f8f;
+}
+
+.statusPrivate,
+.statusInfo {
+  border-color: rgba(88, 199, 255, 0.42);
+  background: rgba(88, 199, 255, 0.1);
+  color: var(--ct6-color-semantic-info-500);
+}
+
+.statusLeadership,
+.statusPremium {
+  border-color: rgba(199, 164, 74, 0.48);
+  background: rgba(199, 164, 74, 0.1);
+  color: var(--ct6-color-accent-gold-500);
+}
+
+.componentTableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-card);
+  background: rgba(5, 6, 7, 0.22);
+}
+
+.componentDataTable tbody tr:hover {
+  background: rgba(53, 225, 132, 0.045);
+}
+
+.toastExample,
+.emptyStateExample {
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-card);
+  background: rgba(5, 6, 7, 0.26);
+  padding: var(--ct6-space-4);
+}
+
+.toastExample {
+  display: grid;
+  gap: var(--ct6-space-1);
+  border-left-width: 4px;
+}
+
+.toastSuccess { border-left-color: var(--ct6-color-primary-500); }
+.toastWarning { border-left-color: var(--ct6-color-semantic-warning-500); }
+.toastError { border-left-color: var(--ct6-color-semantic-error-500); }
+
+.emptyStateExample {
+  display: grid;
+  justify-items: start;
+  gap: var(--ct6-space-3);
+  grid-column: span 2;
+  padding: var(--ct6-space-6);
+}
+
+.emptyStateIcon {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border: 1px solid rgba(53, 225, 132, 0.34);
+  border-radius: var(--ct6-radius-md);
+  background: rgba(53, 225, 132, 0.08);
+  color: var(--ct6-color-primary-500);
+  font-size: 24px;
+}
+
+.componentSpecStack {
+  display: grid;
+  gap: var(--ct6-space-5);
+}
+
+.componentSpecCard {
+  display: grid;
+  gap: var(--ct6-space-5);
+}
+
+.componentSpecHeader span {
+  color: var(--ct6-color-primary-500);
+  font-size: var(--ct6-font-caption-size);
+  font-weight: var(--ct6-font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.componentSpecHeader h3 {
+  margin-top: var(--ct6-space-2);
+  font-size: var(--ct6-font-h3-size);
+}
+
+.componentSpecHeader p {
+  margin: var(--ct6-space-3) 0 0;
+  max-width: 860px;
+}
+
+.componentSpecGrid,
+.componentRuleColumns {
+  display: grid;
+  gap: var(--ct6-space-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.componentRuleColumns {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.componentSpecGrid div,
+.componentRuleColumns > div {
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-card);
+  background: rgba(5, 6, 7, 0.22);
+  padding: var(--ct6-space-4);
+}
+
+.componentSpecGrid dt,
+.componentRuleColumns h4 {
+  margin: 0 0 var(--ct6-space-2);
+  color: var(--ct6-color-text-primary);
+  font-size: var(--ct6-font-caption-size);
+  font-weight: var(--ct6-font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.componentSpecGrid dd {
+  margin: 0;
+}
+
+.componentRuleColumns ul {
+  margin: 0;
+  padding-left: var(--ct6-space-5);
+}
+
+.componentChipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ct6-space-2);
+}
+
+@media (max-width: 1000px) {
+  .formPreviewGrid,
+  .cardPreviewGrid,
+  .feedbackPreviewGrid,
+  .componentSpecGrid,
+  .componentRuleColumns {
+    grid-template-columns: 1fr;
+  }
+
+  .emptyStateExample {
+    grid-column: auto;
+  }
+}
+
