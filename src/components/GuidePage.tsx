@@ -1,4 +1,4 @@
-﻿import { guideContent } from '@/data/guideContent';
+import { guideContent } from '@/data/guideContent';
 import { getAdjacentNavigation, getNavigationItem } from '@/data/navigation';
 import { SectionHeader } from './SectionHeader';
 import { ColorSwatches } from './ColorSwatches';
@@ -9,6 +9,7 @@ import { TypographyShowcase } from './TypographyShowcase';
 import { TokenSystemShowcase } from './TokenSystemShowcase';
 import { IdentityShowcase } from './IdentityShowcase';
 import { LaunchCommunicationShowcase } from './LaunchCommunicationShowcase';
+import { QualityShowcase } from './QualityShowcase';
 import { VoiceToneShowcase } from './VoiceToneShowcase';
 import { MicrocopyShowcase } from './MicrocopyShowcase';
 
@@ -47,6 +48,7 @@ export function GuidePage({ slug }: { slug: string }) {
       {slug === 'components' ? <ComponentShowcase /> : null}
       {slug === 'logo' || slug === 'app-icon' || slug === 'assets' ? <IdentityShowcase variant={slug} /> : null}
       {slug === 'app-store' || slug === 'social' || slug === 'email-notifications' ? <LaunchCommunicationShowcase variant={slug} /> : null}
+      {slug === 'accessibility' || slug === 'themes' || slug === 'motion' || slug === 'do-dont' || slug === 'implementation' ? <QualityShowcase variant={slug} /> : null}
       {slug === 'voice-tone' ? <VoiceToneShowcase /> : null}
       {slug === 'microcopy' ? <MicrocopyShowcase /> : null}
       {slug === 'colors' ? <ColorSwatches /> : null}
