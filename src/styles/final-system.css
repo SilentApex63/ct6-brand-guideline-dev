@@ -1,0 +1,220 @@
+/* === CT6 Phase 9 Final Completion and QA Pass === */
+.finalShowcase {
+  display: grid;
+  gap: var(--ct6-space-6);
+  margin-top: var(--ct6-space-8);
+}
+
+.finalHeroPanel,
+.finalPanel,
+.finalRuleCard,
+.completionCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(61, 70, 82, 0.62);
+  border-radius: var(--ct6-radius-card);
+  background: linear-gradient(135deg, rgba(17, 22, 28, 0.92), rgba(24, 33, 43, 0.68));
+  box-shadow: var(--ct6-shadow-medium);
+  padding: var(--ct6-space-6);
+}
+
+.finalHeroPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+  gap: var(--ct6-space-6);
+  align-items: center;
+}
+
+.finalHeroPanel::before,
+.finalPanel::before,
+.finalRuleCard::before,
+.completionCard::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background:
+    radial-gradient(circle at top right, rgba(53, 225, 132, 0.1), transparent 18rem),
+    linear-gradient(90deg, rgba(53, 225, 132, 0.05), transparent 45%);
+}
+
+.finalHeroPanel > *,
+.finalPanel > *,
+.finalRuleCard > *,
+.completionCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.finalHeroPanel h2,
+.finalPanel h2 {
+  margin: 0;
+  font-family: var(--ct6-font-family-heading);
+  font-size: clamp(26px, 4vw, var(--ct6-font-h1-size));
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.finalHeroPanel p,
+.finalRuleCard p,
+.finalRuleCard li,
+.completionCard p,
+.completionCard li,
+.finalQaList li {
+  color: var(--ct6-color-text-secondary);
+}
+
+.finalStatusConsole,
+.positioningFormula,
+.layoutPreview,
+.visualLanguagePreview {
+  display: grid;
+  gap: var(--ct6-space-3);
+  border: 1px solid rgba(53, 225, 132, 0.26);
+  border-radius: var(--ct6-radius-card);
+  background:
+    radial-gradient(circle at top right, rgba(53, 225, 132, 0.1), transparent 60%),
+    rgba(5, 6, 7, 0.34);
+  padding: var(--ct6-space-5);
+}
+
+.finalStatusConsole strong,
+.positioningFormula strong {
+  font-family: var(--ct6-font-family-heading);
+  font-size: 24px;
+}
+
+.finalStatusConsole span,
+.positioningFormula span,
+.positioningFormula em {
+  color: var(--ct6-color-text-secondary);
+  font-size: var(--ct6-font-body-compact-size);
+  font-style: normal;
+}
+
+.completionGrid,
+.finalRuleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--ct6-space-5);
+}
+
+.completionCard > span {
+  display: inline-flex;
+  margin-bottom: var(--ct6-space-3);
+  border: 1px solid rgba(53, 225, 132, 0.24);
+  border-radius: var(--ct6-radius-badge);
+  background: rgba(53, 225, 132, 0.07);
+  color: var(--ct6-color-primary-500);
+  font-size: var(--ct6-font-caption-size);
+  font-weight: var(--ct6-font-weight-semibold);
+  letter-spacing: 0.08em;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.completionCard h3,
+.finalRuleCard h3 {
+  margin: 0 0 var(--ct6-space-3);
+  font-family: var(--ct6-font-family-heading);
+  font-size: var(--ct6-font-h4-size);
+}
+
+.completionCard ul,
+.finalRuleCard ul,
+.finalQaList {
+  display: grid;
+  gap: var(--ct6-space-2);
+  margin: var(--ct6-space-4) 0 0;
+  padding-left: var(--ct6-space-5);
+}
+
+.finalQaList {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  padding: 0;
+  list-style: none;
+}
+
+.finalQaList li {
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-sm);
+  background: rgba(5, 6, 7, 0.26);
+  padding: var(--ct6-space-3);
+}
+
+.layoutPreview {
+  min-height: 260px;
+}
+
+.layoutBar,
+.layoutCards span,
+.layoutTable span,
+.schematicLines span {
+  display: block;
+  border-radius: var(--ct6-radius-sm);
+  background: rgba(53, 225, 132, 0.16);
+  border: 1px solid rgba(53, 225, 132, 0.22);
+}
+
+.layoutBar {
+  height: 38px;
+}
+
+.layoutCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ct6-space-3);
+}
+
+.layoutCards span {
+  min-height: 72px;
+}
+
+.layoutTable {
+  display: grid;
+  gap: var(--ct6-space-2);
+}
+
+.layoutTable span {
+  height: 24px;
+}
+
+.visualLanguagePreview {
+  min-height: 240px;
+  align-content: center;
+  justify-items: center;
+}
+
+.schematicIcon {
+  display: grid;
+  width: 104px;
+  height: 104px;
+  place-items: center;
+  border: 1px solid rgba(53, 225, 132, 0.42);
+  border-radius: var(--ct6-radius-card);
+  background: rgba(53, 225, 132, 0.08);
+  color: var(--ct6-color-primary-500);
+  font-family: var(--ct6-font-family-heading);
+  font-weight: var(--ct6-font-weight-bold);
+  box-shadow: var(--ct6-shadow-glow-green);
+}
+
+.schematicLines {
+  display: grid;
+  width: min(100%, 260px);
+  gap: var(--ct6-space-2);
+}
+
+.schematicLines span {
+  height: 14px;
+}
+
+@media (max-width: 900px) {
+  .finalHeroPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .layoutCards {
+    grid-template-columns: 1fr;
+  }
+}

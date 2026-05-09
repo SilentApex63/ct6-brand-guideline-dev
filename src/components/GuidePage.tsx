@@ -10,6 +10,7 @@ import { TokenSystemShowcase } from './TokenSystemShowcase';
 import { IdentityShowcase } from './IdentityShowcase';
 import { LaunchCommunicationShowcase } from './LaunchCommunicationShowcase';
 import { QualityShowcase } from './QualityShowcase';
+import { FinalCompletionShowcase } from './FinalCompletionShowcase';
 import { VoiceToneShowcase } from './VoiceToneShowcase';
 import { MicrocopyShowcase } from './MicrocopyShowcase';
 
@@ -49,6 +50,7 @@ export function GuidePage({ slug }: { slug: string }) {
       {slug === 'logo' || slug === 'app-icon' || slug === 'assets' ? <IdentityShowcase variant={slug} /> : null}
       {slug === 'app-store' || slug === 'social' || slug === 'email-notifications' ? <LaunchCommunicationShowcase variant={slug} /> : null}
       {slug === 'accessibility' || slug === 'themes' || slug === 'motion' || slug === 'do-dont' || slug === 'implementation' ? <QualityShowcase variant={slug} /> : null}
+      {slug === 'overview' || slug === 'foundation' || slug === 'strategy' || slug === 'layout' || slug === 'iconography' || slug === 'illustration' || slug === 'imagery' ? <FinalCompletionShowcase variant={slug} /> : null}
       {slug === 'voice-tone' ? <VoiceToneShowcase /> : null}
       {slug === 'microcopy' ? <MicrocopyShowcase /> : null}
       {slug === 'colors' ? <ColorSwatches /> : null}
