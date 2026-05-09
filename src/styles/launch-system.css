@@ -1,0 +1,52 @@
+@import '../styles/content-system.css';
+
+.launchShowcase {
+  display: grid;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.launchPanel {
+  border: 1px solid rgba(61,70,82,.6);
+  border-radius: 16px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(17,22,28,.92), rgba(24,33,43,.72));
+}
+
+.launchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 20px;
+}
+
+.storeCard, .socialCard, .emailCard {
+  border: 1px solid rgba(61,70,82,.5);
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(5,6,7,.28);
+}
+
+.storeFrame {
+  aspect-ratio: 9/19;
+  border-radius: 18px;
+  border: 1px solid rgba(53,225,132,.3);
+  background: radial-gradient(circle at top, rgba(53,225,132,.12), transparent 60%), #0B0E11;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:16px;
+  color:#35E184;
+  font-weight:700;
+}
+
+.notificationList {
+  display:grid;
+  gap:12px;
+}
+
+.notificationItem {
+  border-left: 3px solid #35E184;
+  background: rgba(17,22,28,.65);
+  padding: 14px 16px;
+  border-radius: 10px;
+}
