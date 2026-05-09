@@ -7,6 +7,7 @@ import { ComponentShowcase } from './ComponentShowcase';
 import { ColorSystemShowcase } from './ColorSystemShowcase';
 import { TypographyShowcase } from './TypographyShowcase';
 import { TokenSystemShowcase } from './TokenSystemShowcase';
+import { IdentityShowcase } from './IdentityShowcase';
 
 export function GuidePage({ slug }: { slug: string }) {
   const page = guideContent[slug] ?? guideContent.overview;
@@ -41,6 +42,7 @@ export function GuidePage({ slug }: { slug: string }) {
       {slug === 'typography' ? <TypographyShowcase /> : null}
       {slug === 'tokens' ? <TokenSystemShowcase /> : null}
       {slug === 'components' ? <ComponentShowcase /> : null}
+      {slug === 'logo' || slug === 'app-icon' || slug === 'assets' ? <IdentityShowcase variant={slug} /> : null}
       {slug === 'colors' ? <ColorSwatches /> : null}
       {slug === 'tokens' || slug === 'colors' || slug === 'typography' || slug === 'layout' ? <TokenTables variant={slug} /> : null}
 

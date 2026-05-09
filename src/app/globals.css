@@ -1,4 +1,5 @@
 @import '../styles/tokens.css';
+@import '../styles/identity.css';
 
 * {
   box-sizing: border-box;
@@ -595,7 +596,7 @@ select {
   position: absolute;
   left: var(--ct6-space-3);
   color: var(--ct6-color-primary-500);
-  content: '✓';
+  content: 'âœ“';
 }
 
 .roadmapList {
