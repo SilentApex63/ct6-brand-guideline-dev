@@ -1,52 +1,277 @@
-@import '../styles/content-system.css';
-
+﻿/* === CT6 Phase 7 v2 Launch & Communication System === */
 .launchShowcase {
   display: grid;
-  gap: 24px;
-  margin-top: 32px;
+  gap: var(--ct6-space-6);
+  margin-top: var(--ct6-space-8);
 }
 
+.launchHeroPanel,
 .launchPanel {
-  border: 1px solid rgba(61,70,82,.6);
-  border-radius: 16px;
-  padding: 24px;
-  background: linear-gradient(135deg, rgba(17,22,28,.92), rgba(24,33,43,.72));
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(61, 70, 82, 0.62);
+  border-radius: var(--ct6-radius-card);
+  background: linear-gradient(135deg, rgba(17, 22, 28, 0.92), rgba(24, 33, 43, 0.68));
+  box-shadow: var(--ct6-shadow-medium);
+  padding: var(--ct6-space-6);
 }
 
-.launchGrid {
+.launchHeroPanel {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+  gap: var(--ct6-space-6);
+  align-items: center;
 }
 
-.storeCard, .socialCard, .emailCard {
-  border: 1px solid rgba(61,70,82,.5);
-  border-radius: 16px;
-  padding: 20px;
-  background: rgba(5,6,7,.28);
+.launchHeroPanel::before,
+.launchPanel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background:
+    radial-gradient(circle at top right, rgba(53, 225, 132, 0.11), transparent 19rem),
+    linear-gradient(90deg, rgba(53, 225, 132, 0.07), transparent 48%);
 }
 
-.storeFrame {
-  aspect-ratio: 9/19;
-  border-radius: 18px;
-  border: 1px solid rgba(53,225,132,.3);
-  background: radial-gradient(circle at top, rgba(53,225,132,.12), transparent 60%), #0B0E11;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:16px;
-  color:#35E184;
-  font-weight:700;
+.launchHeroPanel > *,
+.launchPanel > * {
+  position: relative;
+  z-index: 1;
 }
 
-.notificationList {
-  display:grid;
-  gap:12px;
+.launchHeroPanel h2,
+.launchPanel h2 {
+  margin: 0;
+  font-family: var(--ct6-font-family-heading);
+  font-size: clamp(26px, 4vw, var(--ct6-font-h1-size));
+  letter-spacing: -0.04em;
+  line-height: 1.05;
 }
 
-.notificationItem {
-  border-left: 3px solid #35E184;
-  background: rgba(17,22,28,.65);
-  padding: 14px 16px;
-  border-radius: 10px;
+.launchHeroPanel p,
+.launchPanel p,
+.socialTemplateCard dd,
+.channelCard li,
+.emailStepCard p,
+.launchRuleList li,
+.messageExampleCard p {
+  color: var(--ct6-color-text-secondary);
+}
+
+.storeDeviceCluster {
+  display: grid;
+  grid-template-columns: 1fr 0.78fr;
+  gap: var(--ct6-space-4);
+  align-items: end;
+}
+
+.storeDevice {
+  display: grid;
+  min-height: 360px;
+  align-content: end;
+  gap: var(--ct6-space-3);
+  border: 1px solid rgba(53, 225, 132, 0.3);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top, rgba(53, 225, 132, 0.16), transparent 45%),
+    linear-gradient(180deg, rgba(17, 22, 28, 0.92), rgba(5, 6, 7, 0.96));
+  padding: var(--ct6-space-5);
+  box-shadow: var(--ct6-shadow-glow-green);
+}
+
+.secondaryDevice {
+  min-height: 290px;
+  opacity: 0.9;
+}
+
+.storeDevice span,
+.screenshotNumber,
+.copyExampleBlock span,
+.socialMockCard span,
+.notificationExample span,
+.messageExampleCard span {
+  color: var(--ct6-color-text-muted);
+  font-size: var(--ct6-font-caption-size);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.storeDevice strong,
+.socialMockCard strong {
+  font-family: var(--ct6-font-family-heading);
+  font-size: 24px;
+}
+
+.storeDevice em,
+.socialMockCard em {
+  color: var(--ct6-color-primary-500);
+  font-style: normal;
+  font-weight: var(--ct6-font-weight-semibold);
+}
+
+.storeScreenshotGrid,
+.socialTemplateGrid,
+.launchChannelGrid,
+.emailStructureGrid,
+.messageExampleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--ct6-space-5);
+  margin-top: var(--ct6-space-5);
+}
+
+.storeScreenshotCard,
+.socialTemplateCard,
+.channelCard,
+.emailStepCard,
+.messageExampleCard,
+.copyExampleBlock,
+.socialMockCard {
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-card);
+  background: rgba(5, 6, 7, 0.28);
+  padding: var(--ct6-space-5);
+}
+
+.phoneFrame {
+  display: grid;
+  min-height: 280px;
+  place-items: center;
+  margin: var(--ct6-space-4) 0;
+  border: 1px solid rgba(53, 225, 132, 0.24);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top, rgba(53, 225, 132, 0.12), transparent 55%),
+    rgba(11, 14, 17, 0.88);
+  text-align: center;
+}
+
+.phoneFrame span {
+  max-width: 180px;
+  color: var(--ct6-color-primary-500);
+  font-family: var(--ct6-font-family-heading);
+  font-size: 22px;
+  font-weight: var(--ct6-font-weight-bold);
+}
+
+.storeScreenshotCard h3,
+.socialTemplateCard h3,
+.channelCard h3,
+.emailStepCard h3,
+.messageExampleCard h3 {
+  margin: 0 0 var(--ct6-space-3);
+  font-family: var(--ct6-font-family-heading);
+}
+
+.copyExampleBlock {
+  margin-top: var(--ct6-space-4);
+}
+
+.socialMockCard {
+  border-color: rgba(53, 225, 132, 0.24);
+  background:
+    linear-gradient(135deg, rgba(53, 225, 132, 0.08), transparent),
+    rgba(5, 6, 7, 0.34);
+}
+
+.socialTemplateCard dl {
+  display: grid;
+  gap: var(--ct6-space-3);
+  margin: 0;
+}
+
+.socialTemplateCard dt {
+  color: var(--ct6-color-primary-500);
+  font-size: var(--ct6-font-caption-size);
+  font-weight: var(--ct6-font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.socialTemplateCard dd {
+  margin: var(--ct6-space-1) 0 0;
+}
+
+.notificationStack {
+  display: grid;
+  gap: var(--ct6-space-3);
+}
+
+.notificationExample {
+  border-left: 3px solid var(--ct6-color-primary-500);
+  border-radius: var(--ct6-radius-sm);
+  background: rgba(5, 6, 7, 0.36);
+  padding: var(--ct6-space-4);
+}
+
+.notificationExample.info {
+  border-left-color: var(--ct6-color-semantic-info-500);
+}
+
+.notificationExample.warning {
+  border-left-color: var(--ct6-color-semantic-warning-500);
+}
+
+.notificationExample strong {
+  display: block;
+  margin-bottom: var(--ct6-space-1);
+}
+
+.launchRuleList {
+  display: grid;
+  gap: var(--ct6-space-3);
+  margin-top: var(--ct6-space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.launchRuleList li {
+  border: 1px solid var(--ct6-color-border-subtle);
+  border-radius: var(--ct6-radius-sm);
+  background: rgba(5, 6, 7, 0.24);
+  padding: var(--ct6-space-3);
+}
+
+.badCopy,
+.goodCopy {
+  border-radius: var(--ct6-radius-sm);
+  margin-top: var(--ct6-space-3);
+  padding: var(--ct6-space-3);
+}
+
+.badCopy {
+  border: 1px solid rgba(255, 77, 77, 0.28);
+  background: rgba(255, 77, 77, 0.07);
+}
+
+.goodCopy {
+  border: 1px solid rgba(53, 225, 132, 0.28);
+  background: rgba(53, 225, 132, 0.07);
+}
+
+.goodCopy span {
+  color: var(--ct6-color-primary-500);
+}
+
+.badCopy span {
+  color: var(--ct6-color-semantic-error-500);
+}
+
+.whyCopy {
+  border-top: 1px solid var(--ct6-color-border-subtle);
+  margin-top: var(--ct6-space-4);
+  padding-top: var(--ct6-space-3);
+}
+
+@media (max-width: 900px) {
+  .launchHeroPanel,
+  .storeDeviceCluster {
+    grid-template-columns: 1fr;
+  }
+
+  .storeDevice,
+  .secondaryDevice {
+    min-height: 260px;
+  }
 }

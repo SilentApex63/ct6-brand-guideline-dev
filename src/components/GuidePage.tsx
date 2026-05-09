@@ -1,4 +1,4 @@
-import { guideContent } from '@/data/guideContent';
+﻿import { guideContent } from '@/data/guideContent';
 import { getAdjacentNavigation, getNavigationItem } from '@/data/navigation';
 import { SectionHeader } from './SectionHeader';
 import { ColorSwatches } from './ColorSwatches';
@@ -69,3 +69,4 @@ export function GuidePage({ slug }: { slug: string }) {
     </article>
   );
 }
+

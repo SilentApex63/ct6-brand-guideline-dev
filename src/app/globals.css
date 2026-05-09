@@ -598,7 +598,7 @@ select {
   position: absolute;
   left: var(--ct6-space-3);
   color: var(--ct6-color-primary-500);
-  content: 'âœ“';
+  content: 'Ã¢Å“â€œ';
 }
 
 .roadmapList {
@@ -1761,4 +1761,5 @@ td {
   }
 }
 /* PHASE 4 VISUAL SYSTEM END */
+
 
