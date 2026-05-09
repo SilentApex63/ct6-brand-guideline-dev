@@ -598,9 +598,15 @@ select {
 
 .checkList li::before {
   position: absolute;
+  top: 18px;
   left: var(--ct6-space-3);
-  color: var(--ct6-color-primary-500);
-  content: 'Ã¢Å“â€œ';
+  width: 9px;
+  height: 9px;
+  border: 1px solid rgba(53, 225, 132, 0.86);
+  border-radius: 999px;
+  background: var(--ct6-color-primary-500);
+  box-shadow: 0 0 14px rgba(53, 225, 132, 0.48);
+  content: '';
 }
 
 .roadmapList {
@@ -1765,3 +1771,13 @@ td {
 /* PHASE 4 VISUAL SYSTEM END */
 
 
+
+/* landing-priority-overlap-fix */
+.checkList li {
+  min-height: 58px;
+  padding-left: 46px !important;
+}
+
+.checkList li::before {
+  flex: 0 0 auto;
+}

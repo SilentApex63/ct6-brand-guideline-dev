@@ -1,4 +1,4 @@
-﻿const systemStats = [
+const systemStats = [
   { label: 'Guideline pages', value: '24' },
   { label: 'Core tokens', value: '8 sets' },
   { label: 'Primary mode', value: 'Dark' },
