@@ -1,21 +1,33 @@
-import { notFound } from 'next/navigation';
+﻿import { notFound } from 'next/navigation';
 import { BrandShell } from '@/components/BrandShell';
 import { GuidePage } from '@/components/GuidePage';
 import { guideContent } from '@/data/guideContent';
-import { navigation } from '@/data/navigation';
+
+export const dynamic = 'force-static';
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return navigation.map((item) => ({ slug: item.slug }));
+  return Object.keys(guideContent).map((slug) => ({
+    slug,
+  }));
 }
 
-export default function StaticGuidePage({ params }: { params: { slug: string } }) {
-  if (!(params.slug in guideContent)) {
+type StaticGuidePageProps = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+export default async function StaticGuidePage({ params }: StaticGuidePageProps) {
+  const { slug } = await params;
+
+  if (!Object.prototype.hasOwnProperty.call(guideContent, slug)) {
     notFound();
   }
 
   return (
-    <BrandShell activeSlug={params.slug}>
-      <GuidePage slug={params.slug} />
+    <BrandShell activeSlug={slug}>
+      <GuidePage slug={slug} />
     </BrandShell>
   );
 }
